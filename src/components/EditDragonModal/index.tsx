@@ -1,49 +1,54 @@
 import { Avatar, Backdrop, Button, createStyles, Fade, Grid, IconButton, makeStyles, Modal, TextField, Theme, Typography } from "@material-ui/core";
-import { AccountCircle, Close } from "@material-ui/icons";
+import { Close } from "@material-ui/icons";
 import { SyntheticEvent } from "react";
+import { GiSpikedDragonHead } from "react-icons/gi";
 import { useToast } from "../../hooks/useToast";
-import { signUp } from '../../services/fakeAuthService'
+import { fetcher } from "../../services/fetcher";
 
-interface SignUpModalProps {
+interface Dragon {
+  id: string;
+  name: string;
+  type: string;
+  histories: string;
+}
+
+interface EditDragonModalProps {
   show: boolean;
   handleClose: () => void;
+  dragon: Dragon;
 }
-interface SignUpFormInput {
+interface EditDragonFormInput {
   value: string;
 }
 
-interface SignUpFormFields {
-  name: SignUpFormInput;
-  username: SignUpFormInput;
-  password: SignUpFormInput;
-  password_confirmation: SignUpFormInput;
+interface EditDragonFormFields {
+  name: EditDragonFormInput;
+  type: EditDragonFormInput;
+  histories: EditDragonFormInput;
 }
 
 
-export function SignUpModal({ show, handleClose }: SignUpModalProps) {
+export function EditDragonModal({ show, handleClose, dragon }: EditDragonModalProps) {
   const classes = useStyles();
   const { addToast } = useToast()
 
-  const handleSignUp = async (e: SyntheticEvent) => {
+  const handleEditDragon = async (e: SyntheticEvent) => {
     e.preventDefault();
-    const target = e.target as typeof e.target & SignUpFormFields
+    const target = e.target as typeof e.target & EditDragonFormFields
     const values = {
       name: target.name.value.trim(),
-      username: target.username.value.trim(),
-      password: target.password.value.trim(),
+      type: target.type.value.trim(),
+      histories: target.histories.value.trim(),
     }
     try {
-      if (values.password !== target.password_confirmation.value) {
-        throw new Error("Senhas não combinam");
-      }
-      if (values.name === '' || values.username === '' || values.password === '') {
+      if (values.name === '' || values.type === '' || values.histories === '') {
         throw new Error("Todos os campos devem ser preenchidos");
       }
-      await signUp(values);
-      addToast({ message: 'Usuário cadastrado com sucesso', type: 'success' })
+      await fetcher.put(`dragon/${dragon.id}`, values)
+      addToast({ message: 'Dragão atualizado com sucesso', type: 'success' })
       handleClose();
     } catch (error) {
-      addToast({ message: error.message, type: 'error' })
+      addToast({ message: "Não foi possível atualizar o dragão", type: 'error' })
     }
   }
 
@@ -66,21 +71,20 @@ export function SignUpModal({ show, handleClose }: SignUpModalProps) {
             <IconButton size="small" onClick={handleClose}><Close /></IconButton>
           </Grid>
           <Avatar className={classes.avatar}>
-            <AccountCircle />
+            <GiSpikedDragonHead />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Novo Usuário
+            Editar Dragão
         </Typography>
-          <form className={classes.form} noValidate onSubmit={handleSignUp}>
+          <form className={classes.form} noValidate onSubmit={handleEditDragon}>
             <TextField
               variant="outlined"
               margin="normal"
               required
               fullWidth
               id="name"
-              label="Seu nome"
               name="name"
-              autoComplete="name"
+              defaultValue={dragon.name}
               autoFocus
             />
             <TextField
@@ -88,32 +92,20 @@ export function SignUpModal({ show, handleClose }: SignUpModalProps) {
               margin="normal"
               required
               fullWidth
-              id="username"
-              label="Username"
-              name="username"
-              autoComplete="username"
+              id="type"
+              name="type"
+              defaultValue={dragon.type}
+              autoFocus
             />
             <TextField
               variant="outlined"
               margin="normal"
               required
               fullWidth
-              name="password"
-              label="Senha"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-            />
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              name="password_confirmation"
-              label="Confirmar Senha"
-              type="password"
-              id="password_confirmation"
-              autoComplete="password_confirmation"
+              id="histories"
+              name="histories"
+              defaultValue={dragon.histories}
+              autoFocus
             />
             <Grid container>
               <Button
@@ -124,7 +116,7 @@ export function SignUpModal({ show, handleClose }: SignUpModalProps) {
                 color="primary"
                 className={classes.submit}
               >
-                Criar usuário
+                Atualizar
               </Button>
             </Grid>
 

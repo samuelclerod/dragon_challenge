@@ -1,3 +1,4 @@
+import { ConfirmProvider } from "material-ui-confirm";
 import { BrowserRouter } from "react-router-dom";
 import { AuthProvider } from "./hooks/useAuth";
 import { ToastProvider } from "./hooks/useToast";
@@ -9,7 +10,9 @@ export function App() {
     <BrowserRouter>
       <AuthProvider>
         <ToastProvider>
-          <Routes />
+          <ConfirmProvider>
+            <Routes />
+          </ConfirmProvider>
         </ToastProvider>
       </AuthProvider>
     </BrowserRouter>
