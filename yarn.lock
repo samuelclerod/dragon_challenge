@@ -5048,13 +5048,6 @@ extsprintf@^1.2.0:
   resolved "https://registry.yarnpkg.com/extsprintf/-/extsprintf-1.4.0.tgz#e2689f8f356fad62cca65a3a91c5df5f9551692f"
   integrity sha1-4mifjzVvrWLMplo6kcXfX5VRaS8=
 
-fake-auth@^0.1.7:
-  version "0.1.7"
-  resolved "https://registry.yarnpkg.com/fake-auth/-/fake-auth-0.1.7.tgz#c9ac9e6d0e140722d5c80bd1eb76a7b356ef147d"
-  integrity sha512-sKoEFvu0QNNL33Hne5T19o1T3JI/ohyil6ySFf27JwujI2G6o2x0k2h8N3SCiHbCso0fI/kTgfnK9BRKozqg9w==
-  dependencies:
-    js-base64 "^2.5.2"
-
 fast-deep-equal@^3.1.1:
   version "3.1.3"
   resolved "https://registry.yarnpkg.com/fast-deep-equal/-/fast-deep-equal-3.1.3.tgz#3a7d56b559d6cbc3eb512325244e619a65c6c525"
@@ -6857,11 +6850,6 @@ jest@26.6.0:
     "@jest/core" "^26.6.0"
     import-local "^3.0.2"
     jest-cli "^26.6.0"
-
-js-base64@^2.5.2:
-  version "2.6.4"
-  resolved "https://registry.yarnpkg.com/js-base64/-/js-base64-2.6.4.tgz#f4e686c5de1ea1f867dbcad3d46d969428df98c4"
-  integrity sha512-pZe//GGmwJndub7ZghVHz7vjb2LgC1m8B07Au3eYqeqv9emhESByMXxaEgkUkEqJe87oBbSniGYoQNIBklc7IQ==
 
 "js-tokens@^3.0.0 || ^4.0.0", js-tokens@^4.0.0:
   version "4.0.0"
@@ -11240,25 +11228,6 @@ url@^0.11.0:
     punycode "1.3.2"
     querystring "0.2.0"
 
-urs@^0.0.8:
-  version "0.0.8"
-  resolved "https://registry.yarnpkg.com/urs/-/urs-0.0.8.tgz#8a0e0b792073cdb7eec926d08ab1e017ffab3f66"
-  integrity sha512-LaSSPpr91XrVA3vW2zPupw4K6DSQEDKdL4yQZX1mO2fpljIMpB5zctrjRvxLurelWSgKsHsCmfHNCImscryirQ==
-
-use-http@^1.0.20:
-  version "1.0.20"
-  resolved "https://registry.yarnpkg.com/use-http/-/use-http-1.0.20.tgz#15d9d2a239f8621bc76fd191418fd601deafebae"
-  integrity sha512-3JOASSO828AsUwGjH3nhjUxHpR0lxIUSSNO/OM+0YydETX6FWJV5zWiGKTOV1Gsxu/3GLRFUbEJ1Cl3mUGkfnw==
-  dependencies:
-    urs "^0.0.8"
-    use-ssr "^1.0.24"
-    utility-types "^3.10.0"
-
-use-ssr@^1.0.24:
-  version "1.0.24"
-  resolved "https://registry.yarnpkg.com/use-ssr/-/use-ssr-1.0.24.tgz#213a3df58f5ab9268e6fe1a57ad0a9de91e514d1"
-  integrity sha512-0MFps7ezL57/3o0yl4CvrHLlp9z20n1rQZV/lSRz7if+TUoM6POU1XdOvEjIgjgKeIhTEye1U0khrIYWCTWw4g==
-
 use@^3.1.0:
   version "3.1.1"
   resolved "https://registry.yarnpkg.com/use/-/use-3.1.1.tgz#d50c8cac79a19fbc20f2911f56eb973f4e10070f"
@@ -11305,11 +11274,6 @@ utila@~0.4:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/utila/-/utila-0.4.0.tgz#8a16a05d445657a3aea5eecc5b12a4fa5379772c"
   integrity sha1-ihagXURWV6Oupe7MWxKk+lN5dyw=
-
-utility-types@^3.10.0:
-  version "3.10.0"
-  resolved "https://registry.yarnpkg.com/utility-types/-/utility-types-3.10.0.tgz#ea4148f9a741015f05ed74fd615e1d20e6bed82b"
-  integrity sha512-O11mqxmi7wMKCo6HKFt5AhO4BwY3VV68YU07tgxfz8zJTIxr4BpsezN49Ffwy9j3ZpwwJp4fkRwjRzq3uWE6Rg==
 
 utils-merge@1.0.1:
   version "1.0.1"

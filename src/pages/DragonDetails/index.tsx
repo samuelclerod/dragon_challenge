@@ -1,4 +1,5 @@
 import { Button, Card, CardActions, CardContent, makeStyles, Typography } from "@material-ui/core";
+import { Skeleton } from "@material-ui/lab";
 import { useHistory, useParams } from "react-router"
 import { Layout } from "../../components/Layout"
 import { useFetch } from "../../hooks/useFetch";
@@ -23,7 +24,7 @@ export const DragonDetails = () => {
   const { data: dragon } = useFetch<Dragon, Error>(`dragon/${id}`);
   const { goBack } = useHistory();
 
-  if (!dragon) return (<p>Carregando...</p>)
+  // if (!dragon) return (<p>Carregando...</p>)
 
   return (
     <Layout
@@ -32,40 +33,53 @@ export const DragonDetails = () => {
         { name: 'Details' },
       ]}>
       <Card className={classes.root}>
-        <CardContent>
-          <Typography className={classes.title} color="textSecondary" gutterBottom>
-            Nome do Dragão:
-        </Typography>
-          <Typography variant="h3" component="h2">
-            {dragon.name}
-          </Typography>
-          <Typography className={classes.title} color="textSecondary">
-            Tipo de Dragão:
-        </Typography>
-          <Typography variant="h4" component="h2">
-            {dragon.type}
-          </Typography>
-          <Typography className={classes.title} color="textSecondary">
-            História do Dragão:
-        </Typography>
-          <Typography variant="body2" component="p">
-            {dragon.histories}
-          </Typography>
-          <Typography className={classes.title} color="textSecondary">
-            Criado em:
-          </Typography>
-          <Typography className={[classes.pos, classes.title].join(' ')} variant="body2" component="p">
-            {formatDate(new Date(dragon.createdAt))}
-          </Typography>
-          <CardActions>
-            <Button variant="contained" color="primary"
-              onClick={() => goBack()}
-            >Voltar</Button>
-          </CardActions>
-        </CardContent>
+        {dragon
+          ? (
+            <CardContent>
+              <Typography className={classes.title} color="textSecondary" gutterBottom>
+                Nome do Dragão:
+            </Typography>
+              <Typography variant="h3" component="h2">
+                {dragon.name}
+              </Typography>
+              <Typography className={classes.title} color="textSecondary">
+                Tipo de Dragão:
+              </Typography>
+              <Typography variant="h4" component="h2">
+                {dragon.type}
+              </Typography>
+              <Typography className={classes.title} color="textSecondary">
+                História do Dragão:
+              </Typography>
+              <Typography variant="body2" component="p">
+                {dragon.histories}
+              </Typography>
+              <Typography className={classes.pos} color="textSecondary">
+                Criado em: {formatDate(new Date(dragon.createdAt))}
+              </Typography>
+              <CardActions>
+                <Button variant="contained" color="primary"
+                  onClick={() => goBack()}
+                >Voltar</Button>
+              </CardActions>
+            </CardContent>
+          ) : (
+            <CardContent>
+              <Skeleton width="30%"></Skeleton>
+              <Skeleton width="50%" height="6rem"></Skeleton>
+              <Skeleton width="30%"></Skeleton>
+              <Skeleton width="40%" height="5rem"></Skeleton>
+              <Skeleton width="30%"></Skeleton>
+              <Skeleton width="80%" height="3rem"></Skeleton>
+              <Skeleton width="30%"></Skeleton>
+              <Skeleton width="40%"></Skeleton>
+              <Skeleton width="2rem" height="2rem"></Skeleton>
+            </CardContent>
+          )
+        }
 
       </Card>
-    </Layout>
+    </Layout >
   )
 }
 
@@ -76,10 +90,11 @@ const useStyles = makeStyles({
   },
   title: {
     fontSize: 16,
-    paddingTop: 16,
+    paddingTop: '1rem',
     fontWeight: 'bolder',
   },
   pos: {
-    marginBottom: 12,
+    marginBottom: '2rem',
+    marginTop: '2rem',
   },
 });

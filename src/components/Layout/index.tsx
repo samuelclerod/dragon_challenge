@@ -1,6 +1,7 @@
 import { AppBar, Breadcrumbs, Button, Container, createStyles, Link, makeStyles, Theme, Toolbar, Typography } from "@material-ui/core";
 import { grey } from "@material-ui/core/colors";
 import { ReactNode } from "react";
+import { GiSpikedDragonHead } from "react-icons/gi";
 import { useHistory } from "react-router";
 import { useAuth } from "../../hooks/useAuth";
 
@@ -27,6 +28,7 @@ export function Layout({ children, breadcrumbs }: LayoutProps) {
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
+          <GiSpikedDragonHead size='1.5rem' className={classes.logo} />
           <Typography variant="h6" className={classes.title}>
             Dragon
           </Typography>
@@ -63,6 +65,9 @@ const useStyles = makeStyles((theme: Theme) =>
       flexGrow: 1,
       background: grey[100],
       minHeight: '100vh',
+    },
+    logo: {
+      marginRight: theme.spacing(2),
     },
     content: {
       paddingTop: theme.spacing(2),

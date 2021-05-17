@@ -1,5 +1,5 @@
 import { Snackbar } from '@material-ui/core';
-import React, { createContext, useCallback, useContext, useState } from 'react';
+import React, { createContext, ReactNode, useCallback, useContext, useState } from 'react';
 import MuiAlert, { AlertProps } from '@material-ui/lab/Alert';
 
 export interface ToastMessage {
@@ -11,9 +11,13 @@ interface ToastContextData {
     addToast(message: ToastMessage): void;
 }
 
+interface ToastProviderProps {
+    children: ReactNode;
+}
+
 const ToastContext = createContext<ToastContextData>({} as ToastContextData);
 
-const ToastProvider: React.FC = ({ children }) => {
+const ToastProvider = ({ children }: ToastProviderProps) => {
 
     const [message, setMessage] = useState<ToastMessage>();
     const [show, setShow] = useState(false)
@@ -28,7 +32,7 @@ const ToastProvider: React.FC = ({ children }) => {
         setShow(true);
     }, []);
 
-    function handdleShow() {
+    function handleShow() {
         setShow(!show)
     }
 
@@ -39,8 +43,8 @@ const ToastProvider: React.FC = ({ children }) => {
     return (
         <ToastContext.Provider value={{ addToast }}>
             {children}
-            <Snackbar open={show} autoHideDuration={6000} onClose={handdleShow}>
-                <Alert onClose={handdleShow} severity={message?.type}>
+            <Snackbar open={show} autoHideDuration={6000} onClose={handleShow}>
+                <Alert onClose={handleShow} severity={message?.type}>
                     {message?.message}
                 </Alert>
             </Snackbar>
