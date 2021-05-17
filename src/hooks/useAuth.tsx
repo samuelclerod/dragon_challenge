@@ -1,5 +1,5 @@
-import React, { createContext, ReactNode, useCallback, useContext, useState } from "react";
-import { FakeAuthServices } from "../services/fakeAuthService";
+import { createContext, ReactNode, useContext, useState } from "react";
+import { signIn as fakeSignIn } from "../services/fakeAuthService";
 
 interface User {
   id: string;
@@ -40,21 +40,24 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
     return {} as AuthState;
   });
 
-  const signIn = useCallback(async ({ username, password }: SignInCredentials) => {
-    const data = await FakeAuthServices.signIn({ username, password })
-    const { token, user } = data;
-    sessionStorage.setItem("@dragon:token", token);
-    sessionStorage.setItem("@dragon:user", JSON.stringify(user));
+  const signIn = async ({ username, password }: SignInCredentials) => {
+    try {
+      const data = await fakeSignIn({ username, password })
+      const { token, user } = data;
+      sessionStorage.setItem("@dragon:token", token);
+      sessionStorage.setItem("@dragon:user", JSON.stringify(user));
+      setData({ token, user });
+    } catch (error) {
+      throw error;
+    }
+  };
 
-    setData({ token, user });
-  }, []);
-
-  const signOut = useCallback(() => {
+  const signOut = () => {
     sessionStorage.removeItem("@dragon:token");
     sessionStorage.removeItem("@dragon:user");
 
     setData({} as AuthState);
-  }, []);
+  };
 
   return (
     <AuthContext.Provider
@@ -67,7 +70,6 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
 
 const useAuth = (): AuthContextData => {
   const context = useContext(AuthContext);
-
   if (!context) {
     throw new Error("useAuth must be used within an AuthProvider");
   }
