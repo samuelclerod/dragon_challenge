@@ -1,4 +1,5 @@
 This app is a challenge given by South System. It is a MVP that need some adjustments. You are free to modify or propose changes.
+
 ### Used techs
 - React
 - TypeScript
@@ -7,13 +8,13 @@ This app is a challenge given by South System. It is a MVP that need some adjust
 - Material UI (with JSS)
 
 ### ToDo
-[] real api to auth
-[] Add test for components
-[] debounce to requests
-[] layout adjustments
-[] theme improvements [to light and dark mode]
-[] appbar with public buttons [darkmode had to work]
-[] react performance improvements
+- [ ] real api to auth
+- [ ] Add test for components
+- [ ] debounce to requests
+- [ ] layout adjustments
+- [ ] theme improvements [to light and dark mode]
+- [ ] appbar with public buttons [darkmode had to work]
+- [ ] react performance improvements
 
 ### `yarn start`
 
