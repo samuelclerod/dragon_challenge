@@ -1,26 +1,16 @@
 import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-import Avatar from '@material-ui/core/Avatar';
-import { GiSpikedDragonHead } from 'react-icons/gi'
-import { Skeleton } from '@material-ui/lab';
+
 import { useHistory } from 'react-router';
-import { Divider, IconButton, ListItemSecondaryAction } from '@material-ui/core';
-import { Delete, Edit } from '@material-ui/icons';
+import { Divider } from '@material-ui/core';
 import { Fragment, useState } from 'react';
 import { EditDragonModal } from '../EditDragonModal';
 import { useFetch } from '../../hooks/useFetch';
 import { useConfirm } from 'material-ui-confirm';
 import { fetcher } from '../../services/fetcher';
-
-interface Dragon {
-  id: string;
-  name: string;
-  type: string;
-  histories: string;
-}
+import { Dragon } from './DragonInteface'
+import { DragonListItem } from './DragonListItem';
+import { DragonListSkeleton } from './DragonListSkeleton'
 
 export function DragonList() {
 
@@ -58,45 +48,19 @@ export function DragonList() {
       .catch(() => { console.log("salvou") });
   }
 
-  if (!data) return (
-    <List className={classes.root}>
-      {[1, 2, 3].map(n => (
-        <ListItem key={n}>
-          <ListItemAvatar>
-            <Skeleton variant="circle">
-              <Avatar />
-            </Skeleton>
-          </ListItemAvatar>
-          <ListItemText primary={<Skeleton width="50%"></Skeleton>} secondary={<Skeleton width="80%"></Skeleton>} />
-        </ListItem>
-      ))}
-    </List>
-  )
+  if (!data) return <DragonListSkeleton className={classes.root} />
+
   return (<>
     <List className={classes.root}>
       {data?.sort((a, b) => a.name.localeCompare(b.name)).map((dragon, index) =>
       (<Fragment key={dragon.id}>
         {index ? <Divider variant="inset" component="li" /> : null}
-        <ListItem button onClick={e => toDragonDetails(dragon.id)}>
-          <ListItemAvatar>
-            <Avatar>
-              <GiSpikedDragonHead />
-            </Avatar>
-          </ListItemAvatar>
-          <ListItemText primary={dragon.name} secondary={dragon.type} />
-          <ListItemSecondaryAction>
-            <IconButton edge="end"
-              aria-label="edit"
-              onClick={() => handleEditDragon(dragon)}>
-              < Edit color="primary" />
-            </IconButton>
-            <IconButton edge="end" aria-label="remove"
-              onClick={() => handleDeleteDragon(dragon)}
-            >
-              <Delete color="secondary" />
-            </IconButton>
-          </ListItemSecondaryAction>
-        </ListItem>
+        <DragonListItem
+          dragon={dragon}
+          showDragon={() => toDragonDetails(dragon.id)}
+          editDragon={() => handleEditDragon(dragon)}
+          deleteDragon={() => handleDeleteDragon(dragon)}
+        />
       </Fragment>)
       )}
     </List>

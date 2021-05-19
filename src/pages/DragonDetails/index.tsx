@@ -1,4 +1,4 @@
-import { Button, Card, CardActions, CardContent, makeStyles, Typography } from "@material-ui/core";
+import { Button, Card, CardActions, CardContent, makeStyles, Typography as T } from "@material-ui/core";
 import { Skeleton } from "@material-ui/lab";
 import { useHistory, useParams } from "react-router"
 import { Layout } from "../../components/Layout"
@@ -36,27 +36,35 @@ export const DragonDetails = () => {
         {dragon
           ? (
             <CardContent>
-              <Typography className={classes.title} color="textSecondary" gutterBottom>
+              <T className={classes.title}
+                color="textSecondary"
+                gutterBottom>
                 Nome do Dragão:
-            </Typography>
-              <Typography variant="h3" component="h2">
+              </T>
+              <T variant="h3"
+                component="h2">
                 {dragon.name}
-              </Typography>
-              <Typography className={classes.title} color="textSecondary">
+              </T>
+              <T className=
+                {classes.title}
+                color="textSecondary">
                 Tipo de Dragão:
-              </Typography>
-              <Typography variant="h4" component="h2">
+                  </T>
+              <T variant="h4"
+                component="h2">
                 {dragon.type}
-              </Typography>
-              <Typography className={classes.title} color="textSecondary">
+              </T>
+              <T className=
+                {classes.title}
+                color="textSecondary">
                 História do Dragão:
-              </Typography>
-              <Typography variant="body2" component="p">
-                {dragon.histories}
-              </Typography>
-              <Typography className={classes.pos} color="textSecondary">
+                  </T>
+              <T variant="body2" component="p">
+                {dragon.histories}</T>
+              <T className={classes.pos}
+                color="textSecondary">
                 Criado em: {formatDate(new Date(dragon.createdAt))}
-              </Typography>
+              </T>
               <CardActions>
                 <Button variant="contained" color="primary"
                   onClick={() => goBack()}

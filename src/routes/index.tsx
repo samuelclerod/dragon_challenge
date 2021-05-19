@@ -9,6 +9,6 @@ export const Routes = () => (
   <Switch>
     <Route path="/" exact component={Login} />
     <Route path="/dragons" exact component={Dragons} isPrivate />
-    <Route path="/dragons/:id" component={DragonDetails} isPrivate />
+    <Route path="/dragons/:id" exact component={DragonDetails} isPrivate />
   </Switch>
 );
